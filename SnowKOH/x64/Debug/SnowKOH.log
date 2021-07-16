@@ -1,0 +1,13 @@
+﻿  SnowKOH.cpp
+D:\KirillPal\Documents\Visual Studio 2019\Projects\SnowKOH\SnowKOH\SnowKOH.cpp(48): error C2039: c: не является членом "sf::Color"
+  D:\Program Files\SFML-2.5.1\include\SFML\Graphics\Shader.hpp(43): note:  см. объявление "sf::Color"
+D:\KirillPal\Documents\Visual Studio 2019\Projects\SnowKOH\SnowKOH\SnowKOH.cpp(91): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
+D:\KirillPal\Documents\Visual Studio 2019\Projects\SnowKOH\SnowKOH\SnowKOH.cpp(92): warning C4244: аргумент: преобразование "int" в "T", возможна потеря данных
+          with
+          [
+              T=float
+          ]
