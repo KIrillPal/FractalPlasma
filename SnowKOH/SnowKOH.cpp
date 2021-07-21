@@ -2,7 +2,6 @@
 #include <iostream>
 #include <vector>
 #include "SFML/Graphics.hpp"
-#include "Complex.h"
 #include <stack>
 #include <queue>
 #include <Windows.h>
@@ -21,6 +20,7 @@ sf::Sprite result_sprite;
 sf::Texture graphTexture;
 sf::RectangleShape drawline;
 sf::RenderWindow* window;
+int randomRange = 0;
 
 
 sf::Uint8* graphPixels;
@@ -44,7 +44,7 @@ sf::Color mid(sf::Color& a, sf::Color& b)
 
 sf::Color rmid(sf::Color& a, sf::Color& b)
 {
-	int s = 50, s2 = 2 * s;
+	int s = randomRange, s2 = 2 * s;
 	sf::Color answer = sf::Color(
 		(a.r + b.r) / 2 + rand() % s2 - s,
 		(a.g + b.g) / 2 + rand() % s2 - s,
@@ -68,28 +68,6 @@ std::queue<vertex_box> q;
 
 void drawfield(vertex a, vertex b, vertex c, vertex d)
 {
-	/*sf::Vertex points[] = {
-		sf::Vertex(sf::Vector2f(a.x, a.y), a.color),
-		sf::Vertex(sf::Vector2f(b.x-1, b.y), b.color)
-	};
-	if (a.x != c.x && a.y != c.y)
-	{
-		int mx = (a.x + b.x) / 2, my = (a.y + c.y) / 2;
-		vertex c1 = { mx, a.y, mid(a.color, b.color) };
-		vertex c2 = { b.x, my, mid(b.color, c.color) };
-		vertex c3 = { mx, c.y, mid(c.color, d.color) };
-		vertex c4 = { a.x, my, mid(d.color, a.color) };
-		vertex cc = { mx, my, mid(c1.color, c3.color) };
-		drawfield(a, c1, cc, c4);
-		drawfield(c1, b, c2, cc);
-		drawfield(c4, cc, c3, d);
-		drawfield(cc, c2, c, c3);
-	}
-	else
-	{
-		printf("correct");
-	}
-	window->draw(points, 2, sf::Points);*/
 	q.push({ a, b, c, d });
 	while (!q.empty())
 	{
@@ -116,15 +94,17 @@ void drawfield(vertex a, vertex b, vertex c, vertex d)
 			q.push({ c4, cc, c3, d });
 			q.push({ cc, c2, c, c3 });
 		}
-		/*else
-		{
-			printf("correct\n");
-		}*/
 	}
 }
 
 int main()
 {
+	int frameTime;
+	std::cout << "Enter frame time(in milliseconds): ";
+	std::cin >> frameTime;
+	std::cout << "Enter random range, if you're brave enough(50 recommended): ";
+	std::cin >> randomRange;
+	if (frameTime < 0) frameTime = 0;
     window = new sf::RenderWindow();
     window->create(sf::VideoMode(WINDOW_W, WINDOW_H), PROGRAM_NAME);
     window->setFramerateLimit(60);
@@ -141,19 +121,6 @@ int main()
                 return 0;
             }
             int X = e.mouseButton.x, Y = e.mouseButton.y;
-            if (windowMode == 1)
-            {
-                if (e.type == sf::Event::MouseMoved) {
-                }
-                else if (e.type == sf::Event::MouseWheelScrolled) {
-                }
-                else if (e.type == sf::Event::MouseButtonPressed) {
-                }
-                else if (e.type == sf::Event::MouseButtonReleased) {
-                }
-                else if (e.type == sf::Event::KeyPressed) {
-                }
-            }
         }
 		window->clear(sf::Color::Black);
 		drawfield({ 0, 1, sf::Color::Red },
@@ -162,6 +129,6 @@ int main()
 			{ 0, WINDOW_H, sf::Color::Yellow }
 		);
 		window->display();
-		Sleep(100);
+		Sleep(frameTime);
     }
 }

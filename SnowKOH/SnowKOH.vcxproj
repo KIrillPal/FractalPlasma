@@ -130,13 +130,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Complex.cpp" />
-    <ClCompile Include="ScrollWindow.cpp" />
     <ClCompile Include="SnowKOH.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Complex.h" />
-    <ClInclude Include="ScrollWindow.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
